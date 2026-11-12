@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>书笺 · 每周荐读</title>
+  <meta name="description" content="书笺 · 每周荐读。阅读书需要安静坐下来读；听读书可以跟着听下去。本期六本都不在书架上。">
+  <style>
+    :root {
+      --bg: #f5f2eb;
+      --ink: #322f2a;
+      --ink-soft: #5a554d;
+      --muted: #8a8378;
+      --line: #e2dbd0;
+      --link: #4a433b;
+      --cover-bg: #ebe6dc;
+    }
+    * { box-sizing: border-box; }
+    html {
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", Georgia, serif;
+      line-height: 1.85;
+      -webkit-font-smoothing: antialiased;
+    }
+    a {
+      color: var(--link);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.18em;
+      text-decoration-color: #c9c1b4;
+    }
+    a:hover {
+      text-decoration-color: var(--link);
+    }
+    .wrap {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 3.25rem 2rem 4.25rem;
+    }
+    .site-header {
+      max-width: 42rem;
+      margin: 0 auto 2.6rem;
+      padding-bottom: 1.15rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .site-header h1 {
+      margin: 0;
+      font-size: 1.28rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+    }
+    .period {
+      margin: 0.42rem 0 0;
+      font-family: "Noto Sans CJK SC", "Source Han Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-size: 0.84rem;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+    .lead {
+      max-width: 42rem;
+      margin: 0 auto 3rem;
+    }
+    .lead p {
+      margin: 0 0 1rem;
+    }
+    .lead p:last-child {
+      margin-bottom: 0;
+    }
+    .attention {
+      max-width: 42rem;
+      margin: 0 auto 3.4rem;
+    }
+    .attention > h2 {
+      margin: 0 0 1.6rem;
+      font-size: 1.08rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+    .essay {
+      margin: 0 0 2.15rem;
+    }
+    .essay:last-child {
+      margin-bottom: 0;
+    }
+    .essay h3 {
+      margin: 0 0 0.8rem;
+      font-size: 1.02rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      line-height: 1.55;
+    }
+    .essay p {
+      margin: 0 0 0.9rem;
+    }
+    .essay p:last-child {
+      margin-bottom: 0;
+    }
+    .tracks {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      column-gap: 3.75rem;
+      grid-template-rows: auto auto auto auto auto;
+      align-items: start;
+    }
+    .track {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: 1 / span 5;
+      min-width: 0;
+      align-items: start;
+    }
+    .track-name {
+      margin: 0;
+      font-size: 1.08rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+    .track-def {
+      margin: 0.4rem 0 0;
+      padding-bottom: 1.35rem;
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+    .book {
+      padding: 1.45rem 0 1.55rem;
+      border-top: 1px solid var(--line);
+      min-width: 0;
+    }
+    .book-head {
+      display: flex;
+      gap: 1.1rem;
+      align-items: flex-start;
+      margin-bottom: 1.1rem;
+    }
+    .cover {
+      width: 132px;
+      height: auto;
+      flex-shrink: 0;
+      display: block;
+      background: var(--cover-bg);
+      border: 1px solid #e6e0d6;
+    }
+    .book-id {
+      min-width: 0;
+      padding-top: 0.05rem;
+    }
+    .rank {
+      margin: 0 0 0.4rem;
+      font-family: "Noto Sans CJK SC", "Source Han Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+    .title, .essay h3, .track-name, .site-header h1 {
+      text-wrap: pretty;
+    }
+    .title {
+      margin: 0 0 0.45rem;
+      font-size: 1.12rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      line-height: 1.4;
+    }
+    .authors, .edition, .shelf {
+      margin: 0 0 0.22rem;
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+      line-height: 1.65;
+      text-wrap: pretty;
+    }
+    .shelf {
+      margin-bottom: 0;
+    }
+    .author-note {
+      display: block;
+      margin-top: 0.1rem;
+      font-family: "Noto Sans CJK SC", "Source Han Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+    .reason, .relation {
+      margin: 0 0 0.95rem;
+    }
+    .reason h4, .relation h4 {
+      margin: 0 0 0.4rem;
+      font-family: "Noto Sans CJK SC", "Source Han Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+    .reason p, .relation p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+    .detail {
+      margin: 0;
+      font-size: 0.88rem;
+    }
+    .site-footer {
+      margin-top: 3.25rem;
+      padding-top: 1.1rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+    }
+    .site-footer p {
+      margin: 0;
+    }
+    @media (max-width: 880px) {
+      .wrap {
+        padding: 2.25rem 1.25rem 3.25rem;
+      }
+      .tracks {
+        display: block;
+      }
+      .track {
+        display: block;
+        grid-row: auto;
+      }
+      .track + .track {
+        margin-top: 2.4rem;
+      }
+      .cover {
+        width: 108px;
+      }
+      .title {
+        font-size: 1.06rem;
+      }
+    }
+    @supports not (grid-template-rows: subgrid) {
+      .tracks {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-rows: none;
+      }
+      .track {
+        display: block;
+        grid-row: auto;
+      }
+      @media (max-width: 880px) {
+        .tracks { display: block; }
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="site-header">
+      <h1>书笺 · 每周荐读</h1>
+      <p class="period">本期 · 2026年11月12日</p>
+    </header>
+
+    <section class="lead">
+      <p>书架上真正花掉时间的，和被放进来却还停在开头的，往往不是同一幅图。把已读完、正在读、正在听、放入未读和成批点开的书放在一起看，会看见几条反复靠近的线；每条线旁边，也有一整片已经被看见、却还很少走进去的部分。</p>
+<p>本期因此分成两路。阅读书需要安静坐下来读；听读书可以跟着听下去。下面先写下从整架、笔记和正在进行的读听里看见的六条线，再给出这一周的六本书。六本都不在书架上。</p>
+    </section>
+
+    <section class="attention" aria-labelledby="attention-heading">
+      <h2 id="attention-heading">关注与背面</h2>
+      <article class="essay" id="line-1">
+        <h3>一、历史被听见的，和被注视的，不是同一条路</h3>
+        <p>对历史的兴趣，看起来像是一件事，走法其实分成两支。</p>
+<p>一支适合听，也正在被听进去。正在听的是《袁世凯（全三册）》：进度 28%，本周约 7 小时，本月约 14 小时 43 分钟，是当前周期里听得最久的书。已经听完的是《神奇的北魏》。两本都是脉络清楚、人物与时段可以跟着走的长叙事。本月统计里若出现「偏好阅读历史」，主要就是被这段听书时长拉高的，不宜再写成「正在用眼读历史」。</p>
+<p>另一支是用眼读、并且会停下来写的。《杜甫的五城》已经读完（进度 99%），本年约 10 小时，个人想法 28 条，多是旅途现场的短评，其中有「这种随性而行的洒脱，是我向往的」。《女性如何书写历史》仍在读，进度 46%，本年约 9 小时 19 分钟。有一条划线写得很清楚：中世纪研究若只盯着战争、王朝与国王，便会把原有的权力体制继续维持下去；要的是「鲜活的历史」，是「普罗大众平凡的生命和他们丰富多样的活动」。用眼细读时，问题已经转到「历史由谁来写、写谁」。</p>
+<p>听的是长时段里的人物与王朝；看的、写下想法的，是走出来的现场，以及历史被写成的方式。</p>
+<p>它的另一面是：架上还有大量中国史、世界史和文物读物，说明这条兴趣仍在向外伸，但多数还停在放入，尚未走进去。《翦商》进度只有 2%；《曾国藩的正面与侧面》《华杉讲透〈资治通鉴〉》进度为 0%；《三国前夜》《祥瑞》《弃长安》曾在同一时段被放进来，后来的《乱世人心》《大浪淘沙》《大明王朝的七张面孔》也几乎还没有开始。《耶路撒冷三千年》作者套装早在 2024 年 6 月就已在架，后来与另外几本在同一时段被点开，进度仍为 0%。博物馆通识和《国宝中的国宝》同样几乎还没开始。如果只根据正在听的《袁世凯》和已听完的《神奇的北魏》来理解「喜欢历史」，就会把已经写在划线里的那一面，以及已经看见、却还没打开的世界史与文物路径，一并漏掉。</p>
+      </article>
+      <article class="essay" id="line-2">
+        <h3>二、期刊是听的日常节奏，不是架上的收藏</h3>
+        <p>本年与累计里听得最多的，其实是期刊：《看天下》《看世界》是听的，当期来了就跟，过了就离开书架，并不是一本本留在架上正襟危坐地读。习惯很强，但本期不以杂志本身作为主推，只把它看作已经形成的节奏。节奏之外，「想了解当下」却还没开始的，是另一层：同一时段被点开的《芯片战争》，以及《未来呼啸而来》《一个经济杀手的自白》，进度都还是 0%。听杂志的习惯，并不等于财经、科技或国际局势类的书已经读了起来。</p>
+      </article>
+      <article class="essay" id="line-3">
+        <h3>三、读得下去的文学，多是可停顿的随笔与短制</h3>
+        <p>当前最清楚的文学在读，是《如何带着三文鱼旅行》：进度 69%，有划线，也有一条想法——原文问「知来知往是否更幸福」，写下的是「人生知来知往也未见得更幸福」。已经读完、并留下痕迹的，也多偏随笔或短制，比如《朗格汉岛的午后》《肆意生长》《这里是亚美子》。与此同时，残雪、金爱烂、乌格雷西奇，以及《红楼梦》和加缪，常常成批出现在架上，进度却几乎还是 0%。真正读得下去的，是可以中断、可以想一想的随笔与短制；更密的小说和经典，则常常停在收藏。它们被放进来，说明兴趣比正在读的更宽，但不能写成已经读了起来。</p>
+      </article>
+      <article class="essay" id="line-4">
+        <h3>四、寻踪、文物与现场：读完之后还没有接上</h3>
+        <p>《杜甫的五城》不只有时长和读完记录。二十八条想法几乎都停在具体的地方：石碑、陵墓、高原、草原、车窗。读完之后，这本书仍被置顶。架上其实已经为它准备了相邻的一步：连达《寻访山西古庙》、楼庆西《中国小品建筑十讲》都曾经被打开过，之后却没有成为当前在读。一本寻踪读完、想法写得很密之后，最容易发生的，不是兴趣消失，而是下一本还没开始。这条线更依赖看、停、对照现场，不能被听的长时段叙事代替。</p>
+      </article>
+      <article class="essay" id="line-5">
+        <h3>五、影像兴趣很稳定，却很少落成系统的电影书阅读</h3>
+        <p>影像并不是配角，只是它很少走「把电影书读完」这条路。更常被靠近的，是一场放映、一首主题曲、一本原著。真正读出过进度的电影书几乎只有《人文香港：许鞍华电影研究》，后来也停了下来。架上还有一小批影视研究和导演随笔，目前更像一座未读馆。影像兴趣是持续的，获取方式却是订阅、放映和机缘，而不是把电影史读成系统。</p>
+      </article>
+      <article class="essay" id="line-6">
+        <h3>六、具体的人读得完；结构与理论，多半还停在收藏</h3>
+        <p>已经被读完或真正读进去的，常常有一张可以跟随的面孔：《外卖骑手，困在系统里》已经读完；《女性如何书写历史》的划线要的也是平凡生命；《秋园》里曾划下「这些普通人的经历不写出来，就注定会被深埋」。它的另一面，是已经放进书架、却还很少走进去的结构分析、田野与理论——比如项飙、吴毅、德斯蒙德。清楚思考的入口刚刚打开，《简单的逻辑学》正在读；更系统的理论，目前更多还是被放进来，而不是被读下去。</p>
+      </article>
+    </section>
+
+    <div class="tracks">
+      <section class="track" aria-labelledby="track-reading">
+        <h2 class="track-name" id="track-reading">阅读书</h2>
+        <p class="track-def">需要安静坐下来读。</p>
+        <article class="book" data-track="reading" data-rank="lead">
+          <div class="book-head">
+            <img class="cover" src="covers/dadudaoshangdu.jpg" alt="《从大都到上都》封面" width="250" height="357">
+            <div class="book-id">
+              <p class="rank">首推</p>
+              <h3 class="title">《从大都到上都》</h3>
+              <p class="authors">罗新</p>
+              <p class="edition">新星出版社 · ISBN 9787513348584</p>
+              <p class="shelf">不在架</p>
+            </div>
+          </div>
+          <div class="reason">
+            <h4>推荐理由</h4>
+            <p>从大都到上都，是元朝皇帝春去秋来的辇路，也是从农耕世界走进草原的一条路。罗新从北京健德门出发，背着行囊徒步约四百五十公里，经龙虎台、过居庸关、行黑谷、越沙岭，穿过北京、河北的山谷，进入内蒙古草原，走到上都。要把路上的关隘、山川和文献对到一起看，还要停下来想自己是否真的了解所研究的中国，适合安静阅读，不适合当故事听。</p>
+          </div>
+          <div class="relation">
+            <h4>与已读、在读和笔记的关系</h4>
+            <p>已读完且仍置顶的《杜甫的五城》进度 99%，本年阅读约 10 小时，是笔记本里想法最多的一本（28 条想法）。这些想法几乎都是旅途现场的短评。读到作者以徐霞客为向导、连地图也不带，写下「这种随性而行的洒脱，是我向往的」；读到希望「计划一段可以停留的旅行」，「从前慢，现在也可以慢」；读到作者在盐池把那撮泥土也吃了，写下「陆盐是泥土的一部分，而我因此链接了历史」。还写到走在荒凉贫瘠的山西高原上，以及拓印、摩崖和车窗风景。这一本把「自己上路、对照现场」落到另一条古道上，不是把刚读完的唐史寻踪再走一遍。架上已有连达《寻访山西古庙》、楼庆西《中国小品建筑十讲》，那是已经知道的相邻一步；这一本还不在架，走的是历史学者沿元代辇路徒步的那条路。本期《袁世凯》《神奇的北魏》以及《看天下》《看世界》是听的，它们的时长不作用眼阅读的依据；真正用眼读、有笔记的历史，仍是《杜甫的五城》和仍在读的《女性如何书写历史》。正在听的《袁世凯》不再当作新的推荐，已经听完的《神奇的北魏》按听完避开。听的那一路，另有可以跟着路线听下去的世界史；这一本要对着路和文献看。</p>
+          </div>
+          <p class="detail"><a href="https://weread.qq.com/book-detail?type=1&amp;v=f1032f707158ec76f10dbfd" target="_blank" rel="noopener noreferrer">查看详情</a></p>
+        </article>
+        <article class="book" data-track="reading" data-rank="second">
+          <div class="book-head">
+            <img class="cover" src="covers/wangshizhi.jpg" alt="《王氏之死》封面" width="250" height="360">
+            <div class="book-id">
+              <p class="rank">次推</p>
+              <h3 class="title">《王氏之死》</h3>
+              <p class="authors">[美]史景迁<br>译者 张祝馨</p>
+              <p class="edition">南海出版公司 · ISBN 9787573509475</p>
+              <p class="shelf">不在架</p>
+            </div>
+          </div>
+          <div class="reason">
+            <h4>推荐理由</h4>
+            <p>清代山东郯城是一个名不见经传、却多灾多难的小县；妇人王氏只在一份疑案记录里短暂出现，在飘雪的夜里死于丈夫之手。史景迁用县官回忆录、地方县志和《聊斋志异》，把这个边缘小县里普通人的生存境况一点点重建出来：战乱、贫困和地方暴力之中，没有官场人脉，也没有强大的宗族可以倚靠；无名女性的婚姻与舆论，随时可能把她们置于死地。要把材料、地方志和志怪文本对照着读，需要停下来辨别，适合安静阅读，不适合当故事听。这是用史料还原的历史书写，不是把虚构情节当正文来读。</p>
+          </div>
+          <div class="relation">
+            <h4>与已读、在读和笔记的关系</h4>
+            <p>置顶的《女性如何书写历史》进度 46%，本年阅读约 9 小时 19 分钟，有两条划线。其中 2026 年 5 月 29 日的一条，要的是「鲜活的历史」，是「普罗大众平凡的生命和他们丰富多样的活动」。本期不把那本再当作新的推荐，但这条划线说明：在用眼阅读、并且会停下来划的历史书写里，问题已经转向「写谁」。已读完的《外卖骑手，困在系统里》写的是平台里一个工种；这一本改写另一个时代里几乎看不见的普通人，材料和读法都更密。架上已有杨奎松《“边缘人”纪事》、林郁沁《施剑翘复仇案》、郭松义《伦理与生活》，都是已经知道的；这一本还不在架，从一名几乎没有留下名字的妇人写起，把她所在的世界从材料里重建出来。《秋园》里也曾划过「这些普通人的经历不写出来，就注定会被深埋」，那是用眼留下的划线；这一本则是要把一份几乎被深埋的记录读出来的史学著作。正在听的是《袁世凯》那样的人物与王朝；这一本写的不是王朝与国王，而是一个边缘县城里几乎看不见的人。</p>
+          </div>
+          <p class="detail"><a href="https://weread.qq.com/book-detail?type=1&amp;v=15d329c0813ab943ag018c2a" target="_blank" rel="noopener noreferrer">查看详情</a></p>
+        </article>
+        <article class="book" data-track="reading" data-rank="spare">
+          <div class="book-head">
+            <img class="cover" src="covers/guojiadeshijiao.jpg" alt="《国家的视角》封面" width="250" height="362">
+            <div class="book-id">
+              <p class="rank">可备</p>
+              <h3 class="title">《国家的视角》</h3>
+              <p class="authors">詹姆斯·C.斯科特<span class="author-note">微信读书作者栏另见「胡搏」</span><br>译者 王晓毅</p>
+              <p class="edition">社会科学文献出版社 · ISBN 9787520145930</p>
+              <p class="shelf">不在架</p>
+            </div>
+          </div>
+          <div class="reason">
+            <h4>推荐理由</h4>
+            <p>书中分析国家在面对自然和社会时，那种自上而下重新设计的逻辑：一些试图改善人类状况的项目，如何因为忽视复杂性和地方传统而失败。概念、案例和论证都密，需要安静阅读才能跟上，不适合当故事听。负担比前两本更重，故只作为可备。</p>
+          </div>
+          <div class="relation">
+            <h4>与已读、在读和笔记的关系</h4>
+            <p>已经读得完的，是有具体面孔的纪实，比如《外卖骑手，困在系统里》；这一本要跟着论证去看一套国家规划如何简化、如何落空，不能写成同一类正在进行的阅读。当前用眼阅读里，除《如何带着三文鱼旅行》之外，最明确的新进展是《简单的逻辑学》（进度 39%），这是一条已经迈出的、清楚思考的细线，并不是把更系统的理论写成正在读的书。次推已经用《王氏之死》承接「有具体面孔、由谁来写」的这一面；这一本则把问题转到「国家如何看见、设计、安排人们的生活」。架上已有项飙《跨越边界的社区》、吴毅《小镇喧嚣》、德斯蒙德《扫地出门》，这些是已经知道的；这一本还不在架。若本周阅读时间有限，前两本优先。</p>
+          </div>
+          <p class="detail"><a href="https://weread.qq.com/book-detail?type=1&amp;v=1cc32fc0813ab8181g010e2c" target="_blank" rel="noopener noreferrer">查看详情</a></p>
+        </article>
+      </section>
+
+      <section class="track" aria-labelledby="track-listening">
+        <h2 class="track-name" id="track-listening">听读书</h2>
+        <p class="track-def">可以跟着听下去。</p>
+        <article class="book" data-track="listening" data-rank="lead">
+          <div class="book-head">
+            <img class="cover" src="covers/sichouzhilu.jpg" alt="《丝绸之路》封面" width="250" height="360">
+            <div class="book-id">
+              <p class="rank">首推</p>
+              <h3 class="title">《丝绸之路》</h3>
+              <p class="authors">彼得·弗兰科潘<br>译者 邵旭东、孙芳</p>
+              <p class="edition">浙江大学出版社 · ISBN 9787308161459</p>
+              <p class="shelf">不在架</p>
+            </div>
+          </div>
+          <div class="reason">
+            <h4>推荐理由</h4>
+            <p>牛津历史学者彼得·弗兰科潘把世界史的主线放到欧亚通道上，沿着这条路，把不同时段的帝国、信仰与贸易串起来。路线清楚，时段可以顺着往前走，听的时候不必停下来对图表或追理论，适合听书。</p>
+          </div>
+          <div class="relation">
+            <h4>与已读、在读、已听和笔记的关系</h4>
+            <p>长时段、脉络清楚的历史，是已经听得进去的。正在听的《袁世凯》（进度 28%，本周约 7 小时，本月约 14 小时 43 分钟）可以说明这一点，但不要再当作新的推荐，也不再叠一部同一时段的近现代政治人物传；已经听完的《神奇的北魏》按听完避开。这一本把场地改到欧亚通道上的世界史，和这两本并不重复。架上已有《耶路撒冷三千年》作者套装，它在 2024 年 6 月就已经在架，后来与另外几本在同一时段被点开，进度仍为 0%——说明这条更宽的路已经被看见，但那是已经知道的，不宜再推回去。这一本还不在架，不是把世界史收成一座圣城和几组家族的三千年，而是以通道重新组织世界史。《看天下》《看世界》也是听的，只说明连续讲述和杂志都听得进去，本期不以杂志作主推。用眼读、并且会停下来写的，仍是《杜甫的五城》和《女性如何书写历史》；那一支更依赖寻踪与停顿。阅读书那一路用《从大都到上都》承接「自己上路、对照现场」；这一本是可以跟着路线和时段听下去的世界史。</p>
+          </div>
+          <p class="detail"><a href="https://weread.qq.com/book-detail?type=1&amp;v=b0632e205cd4f6b0654191f" target="_blank" rel="noopener noreferrer">查看详情</a></p>
+        </article>
+        <article class="book" data-track="listening" data-rank="second">
+          <div class="book-head">
+            <img class="cover" src="covers/junshidandingbao.jpg" alt="《1453：君士坦丁堡之战》封面" width="250" height="360">
+            <div class="book-id">
+              <p class="rank">次推</p>
+              <h3 class="title">《1453：君士坦丁堡之战》</h3>
+              <p class="authors">罗杰·克劳利<br>译者 陆大鹏</p>
+              <p class="edition">社会科学文献出版社 · ISBN 9787509745120</p>
+              <p class="shelf">不在架</p>
+            </div>
+          </div>
+          <div class="reason">
+            <h4>推荐理由</h4>
+            <p>全书按时间写出 1453 年围绕君士坦丁堡的攻防：战前双方的准备、战争如何展开，以及战后地中海世界的走向。笔墨落在穆罕默德二世与君士坦丁十一世两位统帅，也写出两军将领、大臣与工匠的群像。年份明确，人物可以跟着走，听着就能跟上战事的来龙去脉，适合听书。</p>
+          </div>
+          <div class="relation">
+            <h4>与已读、在读、已听和笔记的关系</h4>
+            <p>同样是已经听得进去的长叙事，只是把镜头收成一场有明确年份、可以跟着两位统帅走的攻防。正在听的《袁世凯》不再当作新的推荐，已经听完的《神奇的北魏》按听完避开；这一本不是晚清评传，也不是北魏史，时间和地点都错开。它也不是《丝绸之路》的缩小版：那一本沿通道看长时段，这一本落到一场收得住的战事。架上的《耶路撒冷三千年》套装进度为 0%，只说明兴趣可能往世界史伸，不能当成已经开始，也不把套装里的书再推回来。阅读书的三本都需要停下来对照道路、文献、县志或理论；这一本是人物与战事按时间展开的叙述，适合听。</p>
+          </div>
+          <p class="detail"><a href="https://weread.qq.com/book-detail?type=1&amp;v=27532fb0813ab8180g016fee" target="_blank" rel="noopener noreferrer">查看详情</a></p>
+        </article>
+        <article class="book" data-track="listening" data-rank="spare">
+          <div class="book-head">
+            <img class="cover" src="covers/guangrongyumengxiang.jpg" alt="《光荣与梦想》封面" width="250" height="360">
+            <div class="book-id">
+              <p class="rank">可备</p>
+              <h3 class="title">《光荣与梦想》</h3>
+              <p class="authors">威廉·曼彻斯特<br>译者署名为四川外国语大学翻译学院</p>
+              <p class="edition">中信出版集团 · ISBN 9787508649993</p>
+              <p class="shelf">不在架</p>
+            </div>
+          </div>
+          <div class="reason">
+            <h4>推荐理由</h4>
+            <p>这部作品写的是美国 1932 到 1972 年的四十年。曼彻斯特以数任总统的执政与竞选为明线，同时写到经济大萧条、人权运动、战争，以及日常生活、风气与口头语的变化，把这四十年按时间铺开。年份清楚，场面具体，可以跟着年代听下去，适合听书。全书为四册，体量比前两本更长，故只作为可备；若本周听书时间有限，前两本优先。</p>
+          </div>
+          <div class="relation">
+            <h4>与已读、在读、已听和笔记的关系</h4>
+            <p>把同一种听法放到二十世纪的美国，和正在听的《袁世凯》时间和地点都错开——那是晚清到民初的人物评传，这一本是 1932 年以后的美国社会实录。已经听完的《神奇的北魏》更不在同一条线上。已读完的《替补：哈里王子自传》是一部王室回忆录；架上另有《被遗忘的士兵》，那是一名士兵的战地记忆。这一本既不是回忆录，也不是单人传记，而是四十年的社会全景。阅读书走的是寻踪现场、材料重建与结构理论；这一本按年份铺开，可以跟着听。</p>
+          </div>
+          <p class="detail"><a href="https://weread.qq.com/book-detail?type=1&amp;v=7d03234059b3ef7d008dc6c" target="_blank" rel="noopener noreferrer">查看详情</a></p>
+        </article>
+      </section>
+    </div>
+
+    <footer class="site-footer">
+      <p>书笺 · 每周荐读</p>
+    </footer>
+  </div>
+</body>
+</html>
