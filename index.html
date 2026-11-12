@@ -3,6 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <script>
+    (function () {
+      try {
+        var v = localStorage.getItem("flyleaf-type-size");
+        if (v === "small" || v === "medium" || v === "large") {
+          document.documentElement.setAttribute("data-type-size", v);
+        }
+      } catch (e) {}
+    })();
+  </script>
   <title>书笺 · 每周荐读</title>
   <meta name="description" content="书笺 · 每周荐读。阅读书需要安静坐下来读；听读书可以跟着听下去。本期六本都不在书架上。">
   <style>
@@ -16,13 +26,17 @@
       --cover-bg: #ebe6dc;
       --sans: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
       --serif: "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", Georgia, serif;
+      --type-size: 20px;
     }
     * { box-sizing: border-box; }
     html {
       background: var(--bg);
       color: var(--ink);
-      font-size: 17px;
+      font-size: var(--type-size);
     }
+    html[data-type-size="small"] { --type-size: 17px; }
+    html[data-type-size="medium"] { --type-size: 20px; }
+    html[data-type-size="large"] { --type-size: 23px; }
     body {
       margin: 0;
       background: var(--bg);
@@ -50,12 +64,18 @@
       padding-left: max(1.25rem, calc(1.25rem + env(safe-area-inset-left, 0px)));
     }
     .site-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      column-gap: 0.85rem;
       max-width: 42rem;
       margin: 0 auto 2.6rem;
       padding-bottom: 1.15rem;
       border-bottom: 1px solid var(--line);
     }
     .site-header h1 {
+      flex: 1 0 100%;
       margin: 0;
       font-family: var(--sans);
       font-size: 1.5rem;
@@ -63,12 +83,54 @@
       letter-spacing: 0.09em;
     }
     .period {
+      flex: 1 1 auto;
       margin: 0.42rem 0 0;
       font-family: var(--sans);
       font-size: 0.84rem;
       font-weight: 400;
       color: var(--muted);
       letter-spacing: 0.08em;
+    }
+    .type-size {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.45em;
+      margin: 0.42rem 0 0 auto;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .type-size-label {
+      margin: 0 0.15em 0 0;
+    }
+    .type-size button {
+      appearance: none;
+      -webkit-appearance: none;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      font: inherit;
+      font-family: var(--sans);
+      letter-spacing: inherit;
+      color: var(--muted);
+      cursor: pointer;
+      line-height: inherit;
+    }
+    .type-size button[aria-pressed="true"] {
+      color: var(--ink-soft);
+      font-weight: 600;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.18em;
+    }
+    .type-size button:focus-visible {
+      outline: 1px solid var(--ink-soft);
+      outline-offset: 0.15em;
     }
     .lead {
       max-width: 42rem;
@@ -237,9 +299,10 @@
     }
     /* Two columns + subgrid only on a genuinely wide desktop, not a phone requesting the desktop site. */
     @media (min-width: 58rem) and (min-device-width: 601px) {
-      html {
-        font-size: 16px;
-      }
+      :root { --type-size: 18px; }
+      html[data-type-size="small"] { --type-size: 16px; }
+      html[data-type-size="medium"] { --type-size: 18px; }
+      html[data-type-size="large"] { --type-size: 20px; }
       .wrap {
         padding-top: max(3.25rem, calc(3.25rem + env(safe-area-inset-top, 0px)));
         padding-right: max(2rem, calc(2rem + env(safe-area-inset-right, 0px)));
@@ -294,9 +357,10 @@
     }
     /* Force a single column on a narrow physical device, even if CSS width is ~980–1024. */
     @media (max-device-width: 600px) {
-      html {
-        font-size: 17px;
-      }
+      :root { --type-size: 20px; }
+      html[data-type-size="small"] { --type-size: 17px; }
+      html[data-type-size="medium"] { --type-size: 20px; }
+      html[data-type-size="large"] { --type-size: 23px; }
       .wrap {
         padding-top: max(2.25rem, calc(2.25rem + env(safe-area-inset-top, 0px)));
         padding-right: max(1.25rem, calc(1.25rem + env(safe-area-inset-right, 0px)));
@@ -346,6 +410,14 @@
     <header class="site-header">
       <h1>书笺 · 每周荐读</h1>
       <p class="period">本期 · 2026年11月12日</p>
+      <div class="type-size" role="group" aria-label="字号">
+        <span class="type-size-label" aria-hidden="true">字号</span>
+        <button type="button" data-type-size="small" aria-label="字号：小" aria-pressed="false">小</button>
+        <span aria-hidden="true">/</span>
+        <button type="button" data-type-size="medium" aria-label="字号：中" aria-pressed="true">中</button>
+        <span aria-hidden="true">/</span>
+        <button type="button" data-type-size="large" aria-label="字号：大" aria-pressed="false">大</button>
+      </div>
     </header>
 
     <section class="lead">
@@ -527,5 +599,33 @@
       <p>书笺 · 每周荐读</p>
     </footer>
   </div>
+  <script>
+    (function () {
+      var KEY = "flyleaf-type-size";
+      var root = document.documentElement;
+      var buttons = document.querySelectorAll(".type-size button[data-type-size]");
+      function apply(size, persist) {
+        if (size !== "small" && size !== "medium" && size !== "large") size = "medium";
+        root.setAttribute("data-type-size", size);
+        buttons.forEach(function (btn) {
+          btn.setAttribute("aria-pressed", btn.getAttribute("data-type-size") === size ? "true" : "false");
+        });
+        if (persist) {
+          try { localStorage.setItem(KEY, size); } catch (e) {}
+        }
+      }
+      var initial = "medium";
+      try {
+        var stored = localStorage.getItem(KEY);
+        if (stored === "small" || stored === "medium" || stored === "large") initial = stored;
+      } catch (e) {}
+      apply(initial, false);
+      buttons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          apply(btn.getAttribute("data-type-size"), true);
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
