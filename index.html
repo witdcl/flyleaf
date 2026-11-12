@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>书笺 · 每周荐读</title>
   <meta name="description" content="书笺 · 每周荐读。阅读书需要安静坐下来读；听读书可以跟着听下去。本期六本都不在书架上。">
   <style>
@@ -14,18 +14,20 @@
       --line: #e2dbd0;
       --link: #4a433b;
       --cover-bg: #ebe6dc;
+      --sans: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+      --serif: "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", Georgia, serif;
     }
     * { box-sizing: border-box; }
     html {
       background: var(--bg);
       color: var(--ink);
-      font-size: 16px;
+      font-size: 17px;
     }
     body {
       margin: 0;
       background: var(--bg);
       color: var(--ink);
-      font-family: "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", Georgia, serif;
+      font-family: var(--serif);
       line-height: 1.85;
       -webkit-font-smoothing: antialiased;
     }
@@ -42,7 +44,10 @@
     .wrap {
       max-width: 72rem;
       margin: 0 auto;
-      padding: 3.25rem 2rem 4.25rem;
+      padding-top: max(2.25rem, calc(2.25rem + env(safe-area-inset-top, 0px)));
+      padding-right: max(1.25rem, calc(1.25rem + env(safe-area-inset-right, 0px)));
+      padding-bottom: max(3.25rem, calc(3.25rem + env(safe-area-inset-bottom, 0px)));
+      padding-left: max(1.25rem, calc(1.25rem + env(safe-area-inset-left, 0px)));
     }
     .site-header {
       max-width: 42rem;
@@ -52,13 +57,14 @@
     }
     .site-header h1 {
       margin: 0;
-      font-size: 1.28rem;
+      font-family: var(--sans);
+      font-size: 1.5rem;
       font-weight: 600;
       letter-spacing: 0.09em;
     }
     .period {
       margin: 0.42rem 0 0;
-      font-family: "Noto Sans CJK SC", "Source Han Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-family: var(--sans);
       font-size: 0.84rem;
       font-weight: 400;
       color: var(--muted);
@@ -80,7 +86,8 @@
     }
     .attention > h2 {
       margin: 0 0 1.6rem;
-      font-size: 1.08rem;
+      font-family: var(--sans);
+      font-size: 1.22rem;
       font-weight: 600;
       letter-spacing: 0.1em;
     }
@@ -92,7 +99,8 @@
     }
     .essay h3 {
       margin: 0 0 0.8rem;
-      font-size: 1.02rem;
+      font-family: var(--sans);
+      font-size: 1.16rem;
       font-weight: 600;
       letter-spacing: 0.03em;
       line-height: 1.55;
@@ -103,23 +111,30 @@
     .essay p:last-child {
       margin-bottom: 0;
     }
+    /* Default: single column. Clear grid/subgrid so Safari does not keep a two-column track. */
     .tracks {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      column-gap: 3.75rem;
-      grid-template-rows: auto auto auto auto auto;
-      align-items: start;
+      display: flex;
+      flex-direction: column;
+      grid-template-columns: none;
+      grid-template-rows: none;
+      column-gap: 0;
+      align-items: stretch;
     }
     .track {
-      display: grid;
-      grid-template-rows: subgrid;
-      grid-row: 1 / span 5;
+      display: flex;
+      flex-direction: column;
+      grid-template-rows: none;
+      grid-row: auto;
       min-width: 0;
-      align-items: start;
+      align-items: stretch;
+    }
+    .track + .track {
+      margin-top: 2.4rem;
     }
     .track-name {
       margin: 0;
-      font-size: 1.08rem;
+      font-family: var(--sans);
+      font-size: 1.22rem;
       font-weight: 600;
       letter-spacing: 0.1em;
     }
@@ -142,7 +157,7 @@
       margin-bottom: 1.1rem;
     }
     .cover {
-      width: 132px;
+      width: 120px;
       height: auto;
       flex-shrink: 0;
       display: block;
@@ -155,18 +170,19 @@
     }
     .rank {
       margin: 0 0 0.4rem;
-      font-family: "Noto Sans CJK SC", "Source Han Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-family: var(--sans);
       font-size: 0.72rem;
       font-weight: 400;
       letter-spacing: 0.12em;
       color: var(--muted);
     }
-    .title, .essay h3, .track-name, .site-header h1 {
+    .title, .essay h3, .track-name, .site-header h1, .attention > h2 {
       text-wrap: pretty;
     }
     .title {
       margin: 0 0 0.45rem;
-      font-size: 1.12rem;
+      font-family: var(--sans);
+      font-size: 1.2rem;
       font-weight: 600;
       letter-spacing: 0.04em;
       line-height: 1.4;
@@ -184,7 +200,7 @@
     .author-note {
       display: block;
       margin-top: 0.1rem;
-      font-family: "Noto Sans CJK SC", "Source Han Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-family: var(--sans);
       font-size: 0.75rem;
       color: var(--muted);
       letter-spacing: 0.02em;
@@ -194,7 +210,7 @@
     }
     .reason h4, .relation h4 {
       margin: 0 0 0.4rem;
-      font-family: "Noto Sans CJK SC", "Source Han Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-family: var(--sans);
       font-size: 0.72rem;
       font-weight: 400;
       letter-spacing: 0.1em;
@@ -219,39 +235,108 @@
     .site-footer p {
       margin: 0;
     }
-    @media (max-width: 880px) {
+    /* Two columns + subgrid only on a genuinely wide desktop, not a phone requesting the desktop site. */
+    @media (min-width: 58rem) and (min-device-width: 601px) {
+      html {
+        font-size: 16px;
+      }
       .wrap {
-        padding: 2.25rem 1.25rem 3.25rem;
+        padding-top: max(3.25rem, calc(3.25rem + env(safe-area-inset-top, 0px)));
+        padding-right: max(2rem, calc(2rem + env(safe-area-inset-right, 0px)));
+        padding-bottom: max(4.25rem, calc(4.25rem + env(safe-area-inset-bottom, 0px)));
+        padding-left: max(2rem, calc(2rem + env(safe-area-inset-left, 0px)));
       }
-      .tracks {
-        display: block;
+      .site-header h1 {
+        font-size: 1.28rem;
       }
-      .track {
-        display: block;
-        grid-row: auto;
+      .attention > h2,
+      .track-name {
+        font-size: 1.08rem;
       }
-      .track + .track {
-        margin-top: 2.4rem;
-      }
-      .cover {
-        width: 108px;
+      .essay h3 {
+        font-size: 1.02rem;
       }
       .title {
-        font-size: 1.06rem;
+        font-size: 1.12rem;
       }
-    }
-    @supports not (grid-template-rows: subgrid) {
+      .cover {
+        width: 132px;
+      }
       .tracks {
         display: grid;
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        grid-template-rows: none;
+        column-gap: 3.75rem;
+        grid-template-rows: auto auto auto auto auto;
+        align-items: start;
       }
       .track {
-        display: block;
-        grid-row: auto;
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: 1 / span 5;
+        min-width: 0;
+        align-items: start;
       }
-      @media (max-width: 880px) {
-        .tracks { display: block; }
+      .track + .track {
+        margin-top: 0;
+      }
+      @supports not (grid-template-rows: subgrid) {
+        .tracks {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+          grid-template-rows: none;
+        }
+        .track {
+          display: block;
+          grid-template-rows: none;
+          grid-row: auto;
+        }
+      }
+    }
+    /* Force a single column on a narrow physical device, even if CSS width is ~980–1024. */
+    @media (max-device-width: 600px) {
+      html {
+        font-size: 17px;
+      }
+      .wrap {
+        padding-top: max(2.25rem, calc(2.25rem + env(safe-area-inset-top, 0px)));
+        padding-right: max(1.25rem, calc(1.25rem + env(safe-area-inset-right, 0px)));
+        padding-bottom: max(3.25rem, calc(3.25rem + env(safe-area-inset-bottom, 0px)));
+        padding-left: max(1.25rem, calc(1.25rem + env(safe-area-inset-left, 0px)));
+      }
+      .site-header h1 {
+        font-size: 1.5rem;
+      }
+      .attention > h2,
+      .track-name {
+        font-size: 1.22rem;
+      }
+      .essay h3 {
+        font-size: 1.16rem;
+      }
+      .title {
+        font-size: 1.2rem;
+      }
+      .cover {
+        width: 120px;
+      }
+      .tracks {
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: none;
+        grid-template-rows: none;
+        column-gap: 0;
+        align-items: stretch;
+      }
+      .track {
+        display: flex;
+        flex-direction: column;
+        grid-template-rows: none;
+        grid-row: auto;
+        min-width: 0;
+        align-items: stretch;
+      }
+      .track + .track {
+        margin-top: 2.4rem;
       }
     }
   </style>
