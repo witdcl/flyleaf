@@ -7,7 +7,7 @@
     (function () {
       var KEY = "flyleaf-reader-type";
       var OLD = "flyleaf-type-size";
-      var FONTS = { serif: 1, sans: 1, wenkai: 1, fangsong: 1 };
+      var FONTS = { serif: 1, sans: 1, wenkai: 1, fangsong: 1, sarasa: 1, xiaolai: 1, zhenkai: 1, genyomin: 1 };
       function clamp(n, a, b) {
         n = Number(n);
         if (!isFinite(n)) return a;
@@ -78,6 +78,34 @@
       font-style: normal;
       font-display: swap;
     }
+    @font-face {
+      font-family: "更纱黑体";
+      src: url("fonts/SarasaGothicSC-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "小赖字体";
+      src: url("fonts/Xiaolai-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "霞鹜臻楷";
+      src: url("fonts/LXGWZhenKai-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "源样明体";
+      src: url("fonts/GenYoMin-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
     :root {
       --bg: #f5f2eb;
       --ink: #322f2a;
@@ -95,7 +123,7 @@
       --leading: 1.85;
       --indent: 0;
       --margin: 1;
-      --pad-x: calc(25px + (var(--margin) - 1) * 105px);
+      --pad-x: calc(25px + max(0, calc(var(--margin) - 1)) * 495px);
       --pad-top: 45px;
       --pad-bottom: 65px;
     }
@@ -103,6 +131,10 @@
     html[data-body-font="sans"] { --body-font: "思源黑体", "Noto Sans SC", "Source Han Sans SC", sans-serif; }
     html[data-body-font="wenkai"] { --body-font: "霞鹜文楷", "LXGW WenKai", cursive, serif; }
     html[data-body-font="fangsong"] { --body-font: "朱雀仿宋", "Zhuque Fangsong", serif; }
+    html[data-body-font="sarasa"] { --body-font: "更纱黑体", sans-serif; }
+    html[data-body-font="xiaolai"] { --body-font: "小赖字体", cursive, serif; }
+    html[data-body-font="zhenkai"] { --body-font: "霞鹜臻楷", cursive, serif; }
+    html[data-body-font="genyomin"] { --body-font: "源样明体", serif; }
     html[data-indent="on"] { --indent: 2em; }
     html[data-indent="off"] { --indent: 0; }
     * { box-sizing: border-box; }
@@ -488,14 +520,23 @@
       width: 100%;
       margin: 0.15rem 0 0;
     }
-    .type-fonts,
+    .type-fonts {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.45rem;
+      margin: 0 0 0.7rem;
+    }
     .type-indent {
       display: flex;
       flex-wrap: wrap;
       gap: 0.45rem;
-      margin: 0 0 0.7rem;
+      margin: 0;
     }
-    .type-indent { margin-bottom: 0; }
+    .type-fonts button.opt {
+      white-space: nowrap;
+      text-align: center;
+      min-width: 0;
+    }
     .type-panel button.opt {
       appearance: none;
       -webkit-appearance: none;
@@ -565,7 +606,7 @@
     /* Two columns + subgrid only on a genuinely wide desktop, not a phone requesting the desktop site. */
     @media (min-width: 58rem) and (min-device-width: 601px) {
       :root {
-        --pad-x: calc(36px + (var(--margin) - 1) * 108px);
+        --pad-x: calc(36px + max(0, calc(var(--margin) - 1)) * 540px);
         --pad-top: 52px;
         --pad-bottom: 76px;
       }
@@ -632,7 +673,7 @@
     /* Force a single column on a narrow physical device, even if CSS width is ~980–1024. */
     @media (max-device-width: 600px) {
       :root {
-        --pad-x: calc(25px + (var(--margin) - 1) * 105px);
+        --pad-x: calc(25px + max(0, calc(var(--margin) - 1)) * 495px);
         --pad-top: 45px;
         --pad-bottom: 65px;
       }
@@ -858,6 +899,10 @@
         <button type="button" class="opt" data-font="sans" aria-pressed="false">思源黑体</button>
         <button type="button" class="opt" data-font="wenkai" aria-pressed="false">霞鹜文楷</button>
         <button type="button" class="opt" data-font="fangsong" aria-pressed="false">朱雀仿宋</button>
+        <button type="button" class="opt" data-font="sarasa" aria-pressed="false">更纱黑体</button>
+        <button type="button" class="opt" data-font="xiaolai" aria-pressed="false">小赖字体</button>
+        <button type="button" class="opt" data-font="zhenkai" aria-pressed="false">霞鹜臻楷</button>
+        <button type="button" class="opt" data-font="genyomin" aria-pressed="false">源样明体</button>
       </div>
       <div class="type-indent" role="group" aria-label="首行缩进">
         <button type="button" class="opt" data-indent="off" aria-pressed="true">关闭</button>
