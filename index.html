@@ -95,7 +95,7 @@
       --leading: 1.85;
       --indent: 0;
       --margin: 1;
-      --pad-x: calc(25px + (var(--margin) - 1) * 40px);
+      --pad-x: calc(25px + (var(--margin) - 1) * 105px);
       --pad-top: 45px;
       --pad-bottom: 65px;
     }
@@ -565,7 +565,7 @@
     /* Two columns + subgrid only on a genuinely wide desktop, not a phone requesting the desktop site. */
     @media (min-width: 58rem) and (min-device-width: 601px) {
       :root {
-        --pad-x: calc(36px + (var(--margin) - 1) * 36px);
+        --pad-x: calc(36px + (var(--margin) - 1) * 108px);
         --pad-top: 52px;
         --pad-bottom: 76px;
       }
@@ -632,7 +632,7 @@
     /* Force a single column on a narrow physical device, even if CSS width is ~980–1024. */
     @media (max-device-width: 600px) {
       :root {
-        --pad-x: calc(25px + (var(--margin) - 1) * 40px);
+        --pad-x: calc(25px + (var(--margin) - 1) * 105px);
         --pad-top: 45px;
         --pad-bottom: 65px;
       }
