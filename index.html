@@ -96,8 +96,8 @@
       --indent: 0;
       --margin: 1;
       --pad-x: calc(25px + (var(--margin) - 1) * 40px);
-      --pad-top: calc(45px + (var(--margin) - 1) * 12px);
-      --pad-bottom: calc(65px + (var(--margin) - 1) * 16px);
+      --pad-top: 45px;
+      --pad-bottom: 65px;
     }
     html[data-body-font="serif"] { --body-font: "思源宋体", "Noto Serif SC", "Source Han Serif SC", serif; }
     html[data-body-font="sans"] { --body-font: "思源黑体", "Noto Sans SC", "Source Han Sans SC", sans-serif; }
@@ -196,7 +196,7 @@
       margin: 0 auto 3rem;
     }
     .attention {
-      margin-bottom: 3.4rem;
+      margin-bottom: 0;
     }
     .lead p,
     .essay p,
@@ -226,6 +226,13 @@
     }
     .essay:last-child {
       margin-bottom: 0;
+    }
+    .tracks > .essay {
+      grid-column: auto;
+      grid-row: auto;
+    }
+    .tracks > .essay + .track {
+      margin-top: 3.4rem;
     }
     .essay h3 {
       margin: 0 0 0.8rem;
@@ -566,8 +573,8 @@
     @media (min-width: 58rem) and (min-device-width: 601px) {
       :root {
         --pad-x: calc(36px + (var(--margin) - 1) * 36px);
-        --pad-top: calc(52px + (var(--margin) - 1) * 16px);
-        --pad-bottom: calc(76px + (var(--margin) - 1) * 20px);
+        --pad-top: 52px;
+        --pad-bottom: 76px;
       }
       .wrap {
         padding-top: max(2.5rem, var(--pad-top), calc(var(--pad-top) + env(safe-area-inset-top, 0px)));
@@ -591,17 +598,39 @@
       .cover {
         width: 132px;
       }
+      .site-header,
+      .lead,
+      .attention,
+      .site-footer {
+        max-width: none;
+        margin-left: 0;
+        margin-right: 0;
+      }
       .tracks {
         display: grid;
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
         column-gap: 3.75rem;
-        grid-template-rows: auto auto auto auto auto;
+        grid-template-rows: auto auto auto auto auto auto;
         align-items: start;
+      }
+      .tracks > .essay:first-of-type {
+        grid-column: 1;
+        grid-row: 1;
+      }
+      .tracks > .essay:last-of-type {
+        grid-column: 2;
+        grid-row: 1;
+      }
+      .tracks > .essay {
+        margin-bottom: 2.8rem;
+      }
+      .tracks > .essay + .track {
+        margin-top: 0;
       }
       .track {
         display: grid;
         grid-template-rows: subgrid;
-        grid-row: 1 / span 5;
+        grid-row: 2 / span 5;
         min-width: 0;
         align-items: start;
       }
@@ -625,8 +654,8 @@
     @media (max-device-width: 600px) {
       :root {
         --pad-x: calc(25px + (var(--margin) - 1) * 40px);
-        --pad-top: calc(45px + (var(--margin) - 1) * 12px);
-        --pad-bottom: calc(65px + (var(--margin) - 1) * 16px);
+        --pad-top: 45px;
+        --pad-bottom: 65px;
       }
       .wrap {
         padding-top: max(2rem, var(--pad-top), calc(var(--pad-top) + env(safe-area-inset-top, 0px)));
@@ -658,6 +687,17 @@
         column-gap: 0;
         align-items: stretch;
       }
+      .tracks > .essay {
+        grid-column: auto;
+        grid-row: auto;
+        margin-bottom: 2.15rem;
+      }
+      .tracks > .essay:last-of-type {
+        margin-bottom: 0;
+      }
+      .tracks > .essay + .track {
+        margin-top: 3.4rem;
+      }
       .track {
         display: flex;
         flex-direction: column;
@@ -688,6 +728,9 @@
 
     <section class="attention" aria-labelledby="attention-heading">
       <h2 id="attention-heading">进入的方式</h2>
+    </section>
+
+    <div class="tracks">
       <article class="essay" id="line-1">
         <h3>沿着一条路走下去，或按可以停下来的节律相处</h3>
         <p>把一条已经展开的线索跟着走下去：一个人、一处现场、一段正在发生的故事。历史也可以这样被听见，例如《袁世凯（全三册）》《神奇的北魏》；也可以走到现场里去看，例如《杜甫的五城》。沿着一个具体的人走进去，还可以读《女性如何书写历史》《外卖骑手，困在系统里》。</p>
@@ -701,9 +744,6 @@
         <p>一种是以必须沉下去的整体与密度进入：不是随时可停的短制，而是要把一个整体连续地读完。密度不等于篇幅，长而清楚的故事仍是可跟随的路径。《焚舟纪》是一次走进较密作品的记录。</p>
         <p>还有一种，是从非人的尺度进入：不从人的故事或制度模型出发，而从物质、自然或时间过程进入。《大脑的故事》《瓦尔登湖》说明这条路曾经被打开过。</p>
       </article>
-    </section>
-
-    <div class="tracks">
       <section class="track" aria-labelledby="track-reading">
         <h2 class="track-name" id="track-reading">阅读书</h2>
         <p class="track-def">需要安静坐下来读。</p>
